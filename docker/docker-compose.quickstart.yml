@@ -56,3 +56,9 @@ services:
     volumes:
       # Persistent data directory (database, agent workspaces, uploads)
       - "${PAPERCLIP_DATA_DIR:-../data/docker-paperclip}:/paperclip"
+    labels:
+      # Optional reverse-proxy Basic Auth gate (e.g. Coolify/Traefik). Only
+      # active when PAPERCLIP_BASIC_AUTH_HTPASSWD is set to a bcrypt hash
+      # (htpasswd -nbB); harmless no-op label otherwise.
+      - "traefik.http.middlewares.paperclip-basicauth.basicauth.users=${PAPERCLIP_BASIC_AUTH_USER:-paperclip}:${PAPERCLIP_BASIC_AUTH_HTPASSWD:-}"
+      - "coolify.traefik.middlewares=paperclip-basicauth"
