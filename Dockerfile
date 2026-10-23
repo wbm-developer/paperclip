@@ -17,6 +17,8 @@ WORKDIR /app
 COPY package.json pnpm-workspace.yaml pnpm-lock.yaml .npmrc ./
 COPY cli/package.json cli/
 COPY server/package.json server/
+COPY server/scripts/ server/scripts/
+COPY server/src/services/copilot-connection-probe.ts server/src/services/copilot-connection-probe.ts
 COPY ui/package.json ui/
 COPY packages/shared/package.json packages/shared/
 COPY packages/db/package.json packages/db/
